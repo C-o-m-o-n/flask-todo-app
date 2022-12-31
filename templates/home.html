@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>flask todo app</title>
+  <style>
+    .container{
+      border: 1px solid #efefef;
+      background-color: #efefef);
+      padding: 5px;
+      margin: 5px;
+    }
+    .add-todo .input-area{
+      border: 4px solid #efeffe;
+      height: 30px;
+      width: 250px;
+      border-radius: 4px;
+    }
+    .add-todo .add-btn{
+      color: #fff;
+      background-color: rgb(5,252,37);
+      padding: 6px;
+      width: 65px;
+      border: 1px solid  rgb(5,252,37);
+      border-radius: 4px;
+      
+    }
+    .item-area{
+      border: 4px solid #efeffe;
+      border-radius: 10px;
+      padding: 5px;
+    }
+    .item-area ul{
+      background-color: white;
+  }
+  .item-area ul a{
+      border: 4px solid #efeffe;
+      color: white;
+      text-decoration: none;
+      font-weight: 250;
+      border-radius: 10px;
+      padding: 5px;
+  }
+  .updel{
+    float: right;
+  }
+  .item-area ul .update-btn{
+    background-color: rgb(6,0,255);
+  }
+  .item-area ul .delete-btn{
+    background-color: rgb(255,34,0);
+  }
+
+    .item-area ul li{
+      background-color: white;
+      text-decoration: none;
+      list-style: none;
+      color: rgb(71,110,120);
+    }
+    .item-area ul span{
+       border: 4px solid #efeffe;
+       color: white;
+       border-radius: 10px;
+       padding: 5px;
+    }
+    .item-area ul .not-complete{
+      background-color: rgba(255,34,0,0.7);
+    }
+   .item-area ul .complete{
+      background-color: rgba(5,252,37,0.7);
+    }
+  </style>
+  
+</head>
+<body>
+  <div class="container">
+    
+  <h1>My todo app</h1>
+  <form action="/add" method="POST" class="add-todo">
+    <input class="input-area" type="text" name="todoitem" placeholder="enter item to do">
+        <input class="add-btn" type="submit" value="add">
+  </form>
+  <br>
+  <div class="item-area">
+    <ul>
+        {% for t in todo %}
+          <li><p>{{ t.id }} | {{ t.item }}</p></li>
+          <br>
+          {% if t.complete == False %}
+            <span class="not-complete">Not Complete</span>
+          {% else %}
+            <span class="complete">Complete</span>
+          {% endif %}
+            <div class="updel">
+                <a class="update-btn" href="/update/{{t.id}}">update</a>
+                <a class="delete-btn" href="/delete/{{t.id}}">delete</a>
+            </div>
+            <br>
+            <br>
+            <hr style="border: 3px solid  #efeffe;">
+        {% endfor %}
+    </ul>
+  </div>
+
+  </div>
+</body>
+</html>
